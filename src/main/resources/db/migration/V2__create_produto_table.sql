@@ -1,0 +1,10 @@
+CREATE TABLE produtos (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    codigo_barras VARCHAR(50) UNIQUE,
+    quantidade INTEGER NOT NULL DEFAULT 0,
+    estoque_minimo INTEGER NOT NULL DEFAULT 0,
+    preco DECIMAL(10,2),
+    ativo BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
