@@ -1,4 +1,4 @@
-package com.pauloricardo.api.DTO;
+package com.pauloricardo.api.DTO.Autenticacao;
 
 public record RegistrarDTO(
         String nome,
