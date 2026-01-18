@@ -47,4 +47,7 @@ public class MovimentacaoModel {
         this.quantidade = quantidade;
         this.dataHora = dataHora;
     }
+
+    public MovimentacaoModel() {
+    }
 }
