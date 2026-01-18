@@ -6,9 +6,41 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.text.Font?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+            fx:controller="com.pauloricardo.frontend_estoque.Controller.LoginController"
+            prefHeight="400.0" prefWidth="300.0">
+
+    <VBox spacing="15"
+          alignment="CENTER"
+          AnchorPane.topAnchor="0"
+          AnchorPane.bottomAnchor="0"
+          AnchorPane.leftAnchor="0"
+          AnchorPane.rightAnchor="0"
+    >
+        <Label text="Controle de Estoque">
+            <font>
+                <Font size="20"/>
+            </font>
+        </Label>
+
+        <TextField fx:id="txtUsername"
+                   promptText="Usuário"
+                   maxWidth="250"
+        />
+        <PasswordField fx:id="txtPassword"
+                       promptText="Senha"
+                       maxWidth="250"
+        />
+        <Button fx:id="btnLogin"
+                text="Entrar"
+                maxWidth="250"
+                onAction="#onLogin"
+
+        />
+
+
+    </VBox>
 
 </AnchorPane>
