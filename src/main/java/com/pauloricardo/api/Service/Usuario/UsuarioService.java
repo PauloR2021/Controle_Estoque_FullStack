@@ -34,6 +34,10 @@ public class UsuarioService {
 
         String encryptedPassword = passwordEncoder.encode(dto.password());
 
+        if (usuarioRepositrory.existsByUsername(usuario.getUsername())) {
+            throw new RuntimeException("Nome de usuário já existe");
+        }
+
         usuario.setNome(dto.nome());
         usuario.setUsername(dto.username());
         usuario.setPassword(encryptedPassword);
@@ -70,13 +74,48 @@ public class UsuarioService {
         usuarioRepositrory.save(usuario);
     }
 
+    @Transactional
+    public void solicitandoReset(String email){
+        UsuarioModel usuario = usuarioRepositrory.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Email não Cadastrado"));
+
+        String code = gerarCodigo();
+
+        usuario.setCodigoReset(code);
+        usuario.setCodigoResetExpira(LocalDateTime.now().plusMinutes(10));
+
+        usuarioRepositrory.save(usuario);
+
+        emailService.resetSenha(email,code);
+    }
+
+    @Transactional
+    public void resetSenha(String email,String code, String novaSenha){
+        UsuarioModel usuario = usuarioRepositrory.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Email não Cadastrado"));
+
+        if(!code.equals(usuario.getCodigoReset())){
+            throw new RuntimeException("Código inválido");
+        }
+
+        if (usuario.getCodigoResetExpira().isBefore(LocalDateTime.now())) {
+            throw new RuntimeException("Código expirado");
+        }
+
+        String encryptedPassword = passwordEncoder.encode(novaSenha);
+
+        usuario.setPassword(encryptedPassword);
+        usuario.setCodigoReset(null);
+        usuario.setCodigoResetExpira(null);
+
+        usuarioRepositrory.save(usuario);
+    }
+
     public String gerarCodigo(){
         return String.valueOf(
                 (int)(Math.random() * 900000) + 100000
         );
     }
-
-
 
 
 }
