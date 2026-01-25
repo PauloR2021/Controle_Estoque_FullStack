@@ -2,21 +2,21 @@ package com.pauloricardo.api.Controller.Autenticacao;
 
 import com.pauloricardo.api.DTO.Autenticacao.AutenticacaoDTO;
 import com.pauloricardo.api.DTO.Autenticacao.LoginResponseDTO;
-import com.pauloricardo.api.DTO.Autenticacao.RegistrarDTO;
+import com.pauloricardo.api.DTO.Usuario.ResetSenhaDTO;
+import com.pauloricardo.api.DTO.Usuario.UsuarioDTO;
+import com.pauloricardo.api.DTO.Usuario.ValidacaoEmailDTO;
+import com.pauloricardo.api.DTO.Usuario.ValidarCodigoDTO;
 import com.pauloricardo.api.Model.Usuario.UsuarioModel;
-import com.pauloricardo.api.Model.Usuario.UsuarioRole;
 import com.pauloricardo.api.Respository.UsuarioRepositrory;
 import com.pauloricardo.api.Service.Autenticacao.TokenService;
+import com.pauloricardo.api.Service.Usuario.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/auth")
@@ -29,17 +29,28 @@ public class AutenticacaoController {
     private AuthenticationManager authenticationManager;
 
     @Autowired
+    private UsuarioService usuarioService;
+
+    @Autowired
     private TokenService tokenService;
 
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid AutenticacaoDTO dto){
 
-        //Criando uma Váriavel com o Username e o Passworod de Login
-        var userNamePassword = new UsernamePasswordAuthenticationToken(dto.username(), dto.password());
+        var user = usuarioRepositrory.findByUsername(dto.username())
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
 
-        //Fazendo a Autenticação das Informações
-        var auth = this.authenticationManager.authenticate(userNamePassword);
+        if (!user.isAtivo()) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body("Usuário não ativado. Verifique seu e-mail.");
+        }
+
+        var userNamePassword =
+                new UsernamePasswordAuthenticationToken(dto.username(), dto.password());
+
+        var auth = authenticationManager.authenticate(userNamePassword);
 
         var token = tokenService.gerarToken((UsuarioModel) auth.getPrincipal());
 
@@ -48,26 +59,36 @@ public class AutenticacaoController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegistrarDTO dto){
+    public ResponseEntity register(@RequestBody @Valid UsuarioDTO dto){
 
-        System.out.println("Entrou no Registrar");
-
-        //Verificando se no Banco de Dados já existe o Usuário
-        if(this.usuarioRepositrory.findByUsername(dto.username()).isPresent()){
-            return ResponseEntity.badRequest().body("Username already exists");
+        if(usuarioRepositrory.findByUsername(dto.username()).isPresent()){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username Já Existe");
         }
 
-        //Criptografando a senha que o Usuário Digitou
-        String encryptedPassword = new BCryptPasswordEncoder().encode(dto.password());
+        usuarioService.cadastararUsuario(dto);
 
-        //Criando um Novo User
-        UsuarioModel user = new UsuarioModel(dto.nome(),dto.username(),encryptedPassword, UsuarioRole.USER, dto.ativo());
-
-        this.usuarioRepositrory.save(user); //Salvando o Usuário no Banco de dados
-
-        return ResponseEntity.ok("User registered successfully");
-
+        return ResponseEntity.ok("Usuário criado. Verifique seu e-mail!");
     }
+
+    @PostMapping("/validar-codigo")
+    public ResponseEntity<?> validarCodigo(@RequestBody ValidarCodigoDTO dto) {
+        usuarioService.validarCodigo(dto);
+        return ResponseEntity.ok("Usuário ativado com sucesso!");
+    }
+
+    @PostMapping("/reset-codigo")
+    public ResponseEntity resetCode(@RequestBody @Valid ValidacaoEmailDTO dto){
+        usuarioService.solicitandoReset(dto.email());
+        return ResponseEntity.ok("Código Enviado para o E-mail");
+    }
+
+
+    @PostMapping("/reset-password")
+    public ResponseEntity resetPassword(@RequestBody @Valid ResetSenhaDTO dto){
+        usuarioService.resetSenha(dto.email(),dto.code(),dto.novaSenha());
+        return ResponseEntity.ok("Senha Alterada com Sucesso");
+    }
+
 
 
 
