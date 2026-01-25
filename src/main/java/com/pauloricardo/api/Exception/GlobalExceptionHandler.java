@@ -4,6 +4,9 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import kotlin.io.AccessDeniedException;
 import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +23,7 @@ import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalExceptionHandler {
     //========================
     //Tratando Erro de Json
@@ -180,6 +184,51 @@ public class GlobalExceptionHandler {
                         request.getRequestURI()
                 ));
     }
+
+    //========================
+    //Erro na Requisição Business
+    //========================
+
+    @ExceptionHandler(BussinessException.class)
+    public ResponseEntity<ApiErroDTO> handleBusinessExecption(
+            BussinessException ex,
+            HttpServletRequest request
+    ){
+        return ResponseEntity.status(ex.getStatus())
+                .body(new ApiErroDTO(
+                        LocalDateTime.now(),
+                        ex.getStatus().value(),
+                        ex.getStatus().name(),
+                        ex.getMessage(),
+                        request.getRequestURI()
+
+                ));
+    }
+
+    @ExceptionHandler(CodigoBarrasDuplicadoException.class)
+    public ResponseEntity<ApiErroDTO> handleCodigoBarrasDuplicado(
+            CodigoBarrasDuplicadoException ex,
+             HttpServletRequest request
+    ) {
+
+        ApiErroDTO error = new ApiErroDTO(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                ex.toString(),
+                ex.getMessage(),
+                request.getRequestURI()
+
+
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.CONFLICT)
+                .body(error);
+    }
+
+
+
+
 
 
 
