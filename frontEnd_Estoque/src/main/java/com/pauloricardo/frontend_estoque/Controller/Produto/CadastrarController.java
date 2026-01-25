@@ -48,11 +48,12 @@ public class CadastrarController {
                     Integer.parseInt(txtMinimo.getText()),
                     txtPreco.getText().replace(",", ".")
             );
+            System.out.println("TOKEN FRONT: " + Session.getToken());
 
 
             //Chamando o HTTP para enviar na API
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8085/produtos"))
+                    .uri(URI.create("http://localhost:8085/produto"))
                     .header("Content-Type", "application/json")
                     .header("Authorization", "Bearer " + Session.getToken()) //Colocando a Autenticação do Usuário
                     .POST(HttpRequest.BodyPublishers.ofString(json))
@@ -63,6 +64,8 @@ public class CadastrarController {
 
             //Retornos da API  Validando os o Cadastros e Erros
             switch (response.statusCode()) {
+                case 200 -> mostrarAlerta("Cadastrado","Produto Cadastrado com Sucesso !!");
+                case 201 -> mostrarAlerta("Cadastrado", "Produto Cadastrado com Sucesso !!");
                 case 400 -> mostrarAlerta("Erro", "Dados inválidos");
                 case 401 -> {
                     mostrarAlerta("Erro", "Sessão expirada. Faça login novamente.");
