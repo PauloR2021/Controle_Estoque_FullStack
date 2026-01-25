@@ -19,6 +19,9 @@ public class ApiApplication {
         System.setProperty("DB_URL", dotenv.get("DB_URL"));
         System.setProperty("DB_USER", dotenv.get("DB_USER"));
         System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+        System.setProperty("EMAIL", dotenv.get("EMAIL"));
+        System.setProperty("SENHA_GOOGLE", dotenv.get("SENHA_GOOGLE"));
+
 
 		SpringApplication.run(ApiApplication.class, args);
 	}
