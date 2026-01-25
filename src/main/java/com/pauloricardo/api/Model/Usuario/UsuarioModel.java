@@ -33,10 +33,28 @@ public class UsuarioModel implements UserDetails {
     @Column(nullable = false,length = 20)
     private UsuarioRole role;
 
-    private  Boolean ativo = true;
+    @Column(name = "email")
+    private String email;
+
+    @Column(nullable = false)
+    private  Boolean ativo = false;
+
+    @Column(name = "codigo_verificacao")
+    private String codigoVerificacao;
+
+    @Column(name = "expira_em")
+    private LocalDateTime expiraEm;
 
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
+
+    @Column(name = "code_reset")
+    private String codigoReset;
+
+    @Column(name="reset_code_expira")
+    private LocalDateTime codigoResetExpira;
+
+
 
     @PrePersist
     public void prePersist() {
@@ -85,5 +103,9 @@ public class UsuarioModel implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
     }
 }
