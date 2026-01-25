@@ -23,28 +23,32 @@ public class SecurityFilter extends OncePerRequestFilter {
     private UsuarioRepositrory userRepository;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain)
+            throws ServletException, IOException {
 
-        String token = recoverToken(request);
-        System.out.println("TOKEN: " +token);
+        try {
+            String token = recoverToken(request);
 
-        if (token != null) {
-            String username = tokenServices.validateToken(token);
-            System.out.println("USERNAME DO TOKEN: " + username);
+            if (token != null) {
+                String username = tokenServices.validateToken(token);
 
-            if (username != null) {
                 userRepository.findByUsername(username).ifPresent(user -> {
-                    UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                    UsernamePasswordAuthenticationToken auth =
+                            new UsernamePasswordAuthenticationToken(
+                                    user, null, user.getAuthorities());
 
-                    SecurityContextHolder.getContext().setAuthentication(authentication);
-                    System.out.println("DEBUG: Authentication setado no SecurityContext");
+                    SecurityContextHolder.getContext().setAuthentication(auth);
                 });
             }
-        }
-        filterChain.doFilter(request,response);
-    }
 
+            filterChain.doFilter(request, response);
+
+        } catch (RuntimeException e) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        }
+    }
     private String recoverToken(HttpServletRequest request){
         String authHeader = request.getHeader("Authorization");
         if(authHeader == null || !authHeader.startsWith("Bearer ")) return null;

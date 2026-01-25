@@ -1,8 +1,11 @@
 package com.pauloricardo.api.Infra.Security;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -15,6 +18,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 
 @EnableMethodSecurity
+@SecurityScheme(name = SecurityConfiguration.SECURITY, type = SecuritySchemeType.HTTP,bearerFormat = "JWT",scheme = "bearer")
 public class SecurityConfiguration {
 
     @Autowired
@@ -33,7 +37,13 @@ public class SecurityConfiguration {
                                 "/v3/api-docs/**",
                                 "/swagger-ui.html"
                         ).permitAll()
-                        .requestMatchers("/auth/login", "/auth/register").permitAll()
+                        .requestMatchers(
+                                "/auth/login",
+                                        "/auth/register",
+                                        "/auth/validar-codigo",
+                                        "/auth/reset-codigo",
+                                        "/auth/reset-password").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/produto/**").authenticated()
                         .anyRequest().authenticated() // qualquer usuário
 
 
