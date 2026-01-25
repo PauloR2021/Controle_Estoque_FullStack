@@ -20,7 +20,7 @@ public class ProdutoModel {
     private String nome;
 
     @Column(name = "codigo_barras",unique = true,length = 50 )
-    private String codigo_barras;
+    private String codigoBarras;
 
     @Column(nullable = false)
     private Integer quantidade = 0;
@@ -48,10 +48,10 @@ public class ProdutoModel {
     public ProdutoModel() {
     }
 
-    public ProdutoModel(Integer id, String nome, String codigo_barras, Integer quantidade, Integer estoqueMinimo, BigDecimal preco, Boolean ativo) {
+    public ProdutoModel(Integer id, String nome, String codigoBarras, Integer quantidade, Integer estoqueMinimo, BigDecimal preco, Boolean ativo) {
         this.id = id;
         this.nome = nome;
-        this.codigo_barras = codigo_barras;
+        this.codigoBarras = codigoBarras;
         this.quantidade = quantidade;
         this.estoqueMinimo = estoqueMinimo;
         this.preco = preco;
