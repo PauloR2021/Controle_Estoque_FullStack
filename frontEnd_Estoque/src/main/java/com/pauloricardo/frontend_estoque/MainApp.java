@@ -10,7 +10,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception{
         FXMLLoader loader= new FXMLLoader(
-                getClass().getResource("/com/pauloricardo/frontend_estoque/view/login.fxml")
+                getClass().getResource("/com/pauloricardo/frontend_estoque/view/criar-usuario.fxml")
         );
 
         stage.setScene(new Scene(loader.load()));
