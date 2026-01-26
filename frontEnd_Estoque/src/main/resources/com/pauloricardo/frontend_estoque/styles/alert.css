@@ -1,0 +1,22 @@
+.dialog-pane {
+    -fx-background-color: #1f2937;
+}
+
+.dialog-pane .label {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #111827;
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.dialog-pane .button:hover {
+    -fx-background-color: #1d4ed8;
+}

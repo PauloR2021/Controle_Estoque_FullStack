@@ -1,0 +1,60 @@
+/* Fundo da Tela */
+
+.root{
+    -fx-background-color: linear-gradient(to bottom right, #1e3c72, #2a5298);
+    -fx-font-family: "Segoe UI",Arial, sans-serif;
+}
+
+/* Título */
+.label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+/* ===============================
+   FORMULÁRIOS (EDIÇÃO / CADASTRO)
+================================ */
+.text-field, .password-field {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #d1d5db;
+    -fx-padding: 8;
+    -fx-pref-width: 500;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #2563eb;
+}
+
+/* CheckBox */
+.check-box {
+    -fx-font-size: 13px;
+    -fx-text-fill: #FFFFFF;
+}
+
+/*Button */
+
+.button.btnSalvar{
+    -fx-background-color: #1CB91C;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 100;
+    -fx-pref-height: 30;
+    -fx-font-siza: 22px;
+}
+
+.button.btnSalvar:hover{
+    -fx-background-color: #46FA46;
+}
+
+.button.btnCancelar{
+    -fx-background-color: #b91c1c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 100;
+    -fx-pref-height: 30;
+    -fx-font-siza: 22px;
+}
+
+.button.btnCancelar:hover{
+    -fx-background-color: #FF3D3D;
+}

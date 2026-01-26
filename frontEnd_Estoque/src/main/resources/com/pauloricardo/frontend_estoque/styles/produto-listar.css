@@ -1,0 +1,86 @@
+/* Fundo da Tela */
+
+.root{
+    -fx-background-color: linear-gradient(to bottom right, #1e3c72, #2a5298);
+    -fx-font-family: "Segoe UI",Arial, sans-serif;
+}
+
+/* Título */
+.label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+/* ===============================
+   CONTEÚDO CENTRAL
+================================ */
+#contentPane {
+    -fx-padding: 20;
+    -fx-background-color: #f4f6f9;
+}
+
+
+/* ===============================
+   TABLEVIEW
+================================ */
+.table-view {
+    -fx-background-color: #eff6ff; /* azul claro */
+    -fx-border-color: #93c5fd;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+/* Cabeçalho */
+.table-view .column-header .label {
+    -fx-text-fill: #000000;      /* cor do texto */
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header {
+    -fx-font-weight: bold;
+    -fx-text-fill: #111827;
+    -fx-alignment: CENTER;
+}
+
+/* Linhas */
+.table-row-cell {
+    -fx-background-color: #ffffff;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f9fafb;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #bfdbfe;
+}
+
+/* Centraliza texto nas colunas */
+.table-cell {
+    -fx-alignment: CENTER;
+    -fx-padding: 8;
+}
+
+
+/* ===============================
+   BOTÕES DE AÇÃO (Editar / Excluir)
+================================ */
+.button {
+    -fx-background-color: #2563eb;
+    -fx-text-fill: white;
+    -fx-background-radius: 6;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #1d4ed8;
+}
+
+/* Botão excluir */
+.button.excluir {
+    -fx-background-color: #b91c1c;
+}
+
+.button.excluir:hover {
+    -fx-background-color: #FF3D3D;
+}
+

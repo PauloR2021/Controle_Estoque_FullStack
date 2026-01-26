@@ -15,7 +15,7 @@
 
 /* Título */
 .label {
-    -fx-text-fill: #2a5298;
+    -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
 }
 
@@ -28,6 +28,7 @@
     -fx-border-color: #cccccc;
     -fx-border-width: 1;
     -fx-padding: 0 10 0 10;
+    -fx-alignment:CENTER;
 }
 
 /* Foco nos inputs */
@@ -51,7 +52,48 @@
     -fx-background-color: #1e3c72;
 }
 
-/* Botão pressionado */
-.button:pressed {
-    -fx-background-color: #162d59;
+
+.button.btnLogin{
+    -fx-background-color: #42D624;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.button.btnLogin:hover{
+ -fx-background-color: #5DCC47;
+}
+.button.btnLogin:pressed{
+    -fx-background-color:#132600
+}
+
+
+.button.btnCadastro{
+    -fx-background-color: #00E6FF ;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+.button.btnCadastro:hover{
+    -fx-background-color: #26C3D4;
+}
+
+.button.btnCadastro:pressed{
+    -fx-background-color:#0F2240;
+}
+
+.button.btnReset{
+    -fx-background-color: #929C32;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.button.btnReset:hover{
+ -fx-background-color: #DAED45;
 }

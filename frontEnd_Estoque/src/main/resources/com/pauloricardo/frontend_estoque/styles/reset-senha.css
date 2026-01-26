@@ -1,0 +1,83 @@
+/* Fundo da Tela */
+
+.root{
+    -fx-background-color: linear-gradient(to bottom right, #1e3c72, #2a5298);
+    -fx-font-family: "Segoe UI",Arial, sans-serif;
+}
+
+/* Título */
+.label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+/* ===============================
+   CONTEÚDO CENTRAL
+================================ */
+#contentPane {
+    -fx-padding: 20;
+    -fx-background-color: #f4f6f9;
+}
+
+
+/* ===============================
+   FORMULÁRIOS (EDIÇÃO / CADASTRO)
+================================ */
+.text-field, .password-field {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #d1d5db;
+    -fx-padding: 8;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #2563eb;
+}
+
+.button.btnLogin{
+    -fx-background-color: #42D624;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.button.btnLogin:hover{
+ -fx-background-color: #5DCC47;
+}
+.button.btnLogin:pressed{
+    -fx-background-color:#132600;
+}
+
+.button.btnMostarSenha{
+    -fx-background-color: #00E6FF;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-text-fill: #000000;
+}
+
+.button.btnMostarSenha:hover{
+    -fx-background-color: #26C3D4;
+}
+
+.button {
+    -fx-background-color: #42D624;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+
+.button.btnCriar:hover{
+    -fx-background-color: #5DCC47;
+}
+
+.button.btnCriar:pressed{
+    -fx-background-color:#0F2240;
+}

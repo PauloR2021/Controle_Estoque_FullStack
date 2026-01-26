@@ -1,0 +1,54 @@
+/* Fundo da Tela */
+
+.root{
+    -fx-background-color: linear-gradient(to bottom right, #1e3c72, #2a5298);
+    -fx-font-family: "Segoe UI",Arial, sans-serif;
+}
+
+/* Título */
+.label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+/* ===============================
+   CONTEÚDO CENTRAL
+================================ */
+#contentPane {
+    -fx-padding: 20;
+    -fx-background-color: #f4f6f9;
+}
+
+
+/* ===============================
+   FORMULÁRIOS (EDIÇÃO / CADASTRO)
+================================ */
+.text-field, .password-field {
+    -fx-background-radius: 6;
+    -fx-border-radius: 6;
+    -fx-border-color: #d1d5db;
+    -fx-padding: 8;
+    -fx-alignment: CENTER;
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #2563eb;
+}
+
+.button.btnValidacao{
+    -fx-background-color: #42D624;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+    -fx-text-fill: #FFFFFF;
+}
+
+.button.btnValidacao:hover{
+    -fx-background-color: #5DCC47;
+}
+
+.button.btnValidacao:pressed{
+    -fx-background-color: #132600;
+}

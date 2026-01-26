@@ -1,0 +1,66 @@
+/* Fundo da Tela */
+
+.root{
+    -fx-background-color: linear-gradient(to bottom right, #1e3c72, #2a5298);
+    -fx-font-family: "Segoe UI",Arial, sans-serif;
+}
+
+
+/* Título */
+.label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
+/* Botão */
+.button.btnProduto {
+    -fx-background-color: #26C3D4;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.button.btnProduto:hover{
+    -fx-background-color: #00E6FF;
+}
+
+.button.btnProduto:pressed{
+    -fx-background-color: #0F2240;
+}
+
+/* Hover botão */
+.button:hover {
+    -fx-background-color: #1e3c72;
+}
+
+/* Botão pressionado */
+.button:pressed {
+    -fx-background-color: #162d59;
+}
+
+.button.btnLogout{
+    -fx-background-color: #b91c1c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 100;
+    -fx-pref-height: 30;
+    -fx-font-siza: 22px;
+    -fx-alignment:CENTER;
+}
+
+.button.btnLogout:hover{
+    -fx-background-color: #FF3D3D;
+}
+
+.button.btnSair{
+    -fx-background-color: #BAB3B3;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-pref-width: 100;
+    -fx-pref-height: 30;
+    -fx-font-siza: 22px;
+    -fx-alignment:CENTER;
+}
+
