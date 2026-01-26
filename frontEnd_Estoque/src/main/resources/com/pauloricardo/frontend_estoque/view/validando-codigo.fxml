@@ -6,9 +6,50 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.pauloricardo.frontend_estoque.Controller.ValidandoCodigo"
+      prefHeight="600.0" prefWidth="1200.0"
+      spacing="15"
+      alignment="TOP_CENTER"
+      stylesheets="/com/pauloricardo/frontend_estoque/styles/valida-usuario.css">
 
-</AnchorPane>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <HBox alignment="TOP_RIGHT" prefWidth="600">
+        <Button fx:id="btnLogin" text="Login" styleClass="btnLogin" onAction="#telalogin"/>
+    </HBox>
+
+    <Label text="Validação do Código" styleClass="titulo"/>
+    <Separator prefWidth="200"/>
+
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+
+        <Label text="Digite o Email:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="txtEmail"
+                   promptText="Digite o Seu Email de Cadastro"
+                   GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label text="Código de Validação:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="txtCodigo"
+                   promptText="Digite o Código de Validação"
+                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    </GridPane>
+
+    <!-- BOTÃO CADASTRAR CENTRALIZADO -->
+    <Separator prefWidth="200" />
+    <HBox alignment="CENTER" prefWidth="600">
+        <Button fx:id="btnValidar"
+                text="Validar Código"
+                styleClass="btnValidar"
+                onAction="#validando"
+        />
+    </HBox>
+
+
+
+
+</VBox>

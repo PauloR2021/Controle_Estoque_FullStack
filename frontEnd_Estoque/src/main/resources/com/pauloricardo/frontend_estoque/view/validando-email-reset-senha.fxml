@@ -8,7 +8,31 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+            fx:controller="com.pauloricardo.frontend_estoque.Controller.ValidandoEmailResetSenha"
+            prefHeight="400.0" prefWidth="600.0"
+            stylesheets="/com/pauloricardo/frontend_estoque/styles/validando-email-reset-senha.css">
+
+
+    <VBox
+            spacing="15"
+            alignment="CENTER"
+            AnchorPane.topAnchor="0"
+            AnchorPane.bottomAnchor="0"
+            AnchorPane.leftAnchor="0"
+            AnchorPane.rightAnchor="0">
+
+        <Label text="Email para Validação"/>
+        <TextField fx:id="txtEmail"
+                   promptText="Digite Seu Email de Cadastro"
+                   maxWidth="300"
+        />
+
+        <Button fx:id="btnValidacao"
+                text="Validar Email"
+                styleClass="btnValidacao"
+                onAction="#telaResetSenha"
+        />
+
+    </VBox>
 
 </AnchorPane>

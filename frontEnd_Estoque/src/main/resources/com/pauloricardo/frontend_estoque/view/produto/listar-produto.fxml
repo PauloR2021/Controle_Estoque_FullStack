@@ -6,9 +6,32 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
+<VBox xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+            fx:controller="com.pauloricardo.frontend_estoque.Controller.Produto.ListarProduto"
+            prefHeight="600.0" prefWidth="1200.0"
+            stylesheets="/com/pauloricardo/frontend_estoque/styles/produto-listar.css"
+            alignment="CENTER">
 
-</AnchorPane>
+    <Label text="Lista de Produtos" style="-fx-font-size: 18px;" alignment="TOP_CENTER"/>
+
+
+    <TableView fx:id="tabelaProduto" prefWidth="600">
+        <columns >
+            <TableColumn fx:id="colId" text="ID Produto" />
+            <TableColumn fx:id="colNome" text="Nome Produto"/>
+            <TableColumn fx:id="colCodigo" text="Codigo de Barras"/>
+            <TableColumn fx:id="colPreco" text="Preço"/>
+            <TableColumn fx:id="colQuantidade" text="Quantidade Estoque"/>
+            <TableColumn fx:id="colQuantidadeMinina" text="Quantidade Minima"/>
+            <TableColumn fx:id="colAtivo" text="Produto Ativo"/>
+            <TableColumn fx:id="colData" text="Data e Hora"/>
+
+            <!-- 👇 NOVA COLUNA -->
+            <TableColumn fx:id="colAcoes" text="Ações"/>
+
+        </columns>
+    </TableView>
+
+
+</VBox>

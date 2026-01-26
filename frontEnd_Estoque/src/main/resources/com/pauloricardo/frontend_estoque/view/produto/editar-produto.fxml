@@ -6,9 +6,55 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.pauloricardo.frontend_estoque.Controller.Produto.EditarProduto"
+      stylesheets="/com/pauloricardo/frontend_estoque/styles/produto-editar.css"
+      prefHeight="600.0" prefWidth="1200.0"
+      spacing="15"
+      alignment="TOP_CENTER">
 
-</AnchorPane>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Editar Produto" alignment="CENTER" />
+
+    <Separator prefWidth="200" />
+
+
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+
+        <Label text="ID do Produto:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="txtId" promptText="ID do Produto" editable="false" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Nome do Produto:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+        <TextField fx:id="txtNome" promptText="Nome do Produto" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Código do Produto:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="txtCodigo" promptText="Código de Barras" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Preço do Produto:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="txtPreco" promptText="Preço" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+        <Label text="Quantidade do Produto:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <TextField fx:id="txtQuantidade" promptText="Quantidade" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+        <Label text="Quantidade Miníma do Produto:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <TextField fx:id="txtQuantidadeMinima" promptText="Quantidade Mínima" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+
+        <Label text="Produto Ativo:" GridPane.columnIndex="0" GridPane.rowIndex="6"/>
+        <CheckBox fx:id="chkAtivo" text="Produto Ativo" alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+    </GridPane>
+
+    <Separator prefWidth="200"/>
+
+    <HBox spacing="10" alignment="CENTER" prefWidth="600">
+        <Button fx:id="btnSalvar" text="Salvar" onAction="#salvar" styleClass="btnSalvar"/>
+        <Button fx:id="btnCancelar" text="Cancelar" onAction="#cancelar" styleClass="btnCancelar"/>
+    </HBox>
+
+
+
+</VBox>

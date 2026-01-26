@@ -10,21 +10,25 @@
 <StackPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.pauloricardo.frontend_estoque.Controller.MenuPrincipalController"
-            alignment="CENTER">
+            stylesheets="/com/pauloricardo/frontend_estoque/styles/menu-principal.css"
+            alignment="CENTER"
+>
 
 
 
-    <VBox spacing="15" alignment="CENTER"
-          style="-fx-background-color: #2c3e50;"  >
-        <Button fx:id="btnLogout" text="Logout" alignment="TOP_LEFT" onAction="#logout"></Button>
+    <VBox spacing="15" alignment="CENTER">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+
+        <Button fx:id="btnLogout" text="Logout" alignment="TOP_LEFT" onAction="#logout" styleClass="btnLogout"/>
         <Separator prefWidth="200"/>
-        <Label text="📦 Estoque"
-               style="-fx-text-fill: white; -fx-font-size: 18;" />
-        <Button text="Produtos"/>
-        <Button text="Usuários"/>
-        <Button text="Movimentações"/>
+
+        <Label text="📦 Estoque"/>
+        <Button fx:id="btnProduto" text="Produtos" onAction="#telaProduto" styleClass="btnProduto"/>
+
         <Separator prefWidth="200"/>
-        <Button fx:id="btnSair" text="Sair"  prefWidth="200" onAction="#sair"/>
+        <Button fx:id="btnSair" text="Sair"  prefWidth="200" onAction="#sair" styleClass="btnSair"/>
 
     </VBox>
 

@@ -6,9 +6,65 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.pauloricardo.frontend_estoque.Controller.ResetSenha"
+      prefHeight="600.0" prefWidth="1200.0"
+      spacing="15"
+      alignment="TOP_CENTER"
+      stylesheets="/com/pauloricardo/frontend_estoque/styles/reset-senha.css">
 
-</AnchorPane>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Criar Usuário" styleClass="titulo"/>
+
+    <Separator prefWidth="200"/>
+
+    <HBox alignment="TOP_RIGHT" prefWidth="600">
+        <Button fx:id="btnLogin" text="Login" styleClass="btnLogin" onAction="#login"/>
+    </HBox>
+
+
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+
+        <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="txtEmail"
+                   promptText="Digite o Seu Email"
+                   GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label text="Código de Válidação:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="txtCode"
+                   promptText="Digite o Código de Válidação"
+                   GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+
+        <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <PasswordField fx:id="txtSenha"
+                       promptText="Digite seu Password"
+                       prefWidth="250"
+                       GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <TextField fx:id="textFieldSenha"
+                   promptText="Digite seu Password"
+                   visible="false"
+                   managed="false"
+                   prefWidth="250"
+                   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+
+        <Button fx:id="btnMostrarSenha" text="👁" styleClass="btnMostarSenha"
+                GridPane.columnIndex="2" GridPane.rowIndex="2"
+                onAction="#mostrarSenha"/>
+
+    </GridPane>
+
+    <!-- BOTÃO CADASTRAR CENTRALIZADO -->
+    <Separator prefWidth="200" />
+    <HBox alignment="CENTER" prefWidth="600">
+        <Button fx:id="btnCriar" text="Cadastrar" styleClass="btnCriar" onAction="#cadastrarNovaSenha"/>
+    </HBox>
+
+</VBox>

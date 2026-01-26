@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -10,7 +7,9 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.pauloricardo.frontend_estoque.Controller.LoginController"
-            prefHeight="400.0" prefWidth="300.0">
+            prefHeight="600.0" prefWidth="1200.0"
+            stylesheets="/com/pauloricardo/frontend_estoque/styles/login.css"
+            >
 
     <VBox spacing="15"
           alignment="CENTER"
@@ -27,16 +26,34 @@
 
         <TextField fx:id="txtUsername"
                    promptText="Usuário"
-                   maxWidth="250"
+                   maxWidth="300"
+
         />
         <PasswordField fx:id="txtPassword"
                        promptText="Senha"
-                       maxWidth="250"
+                       maxWidth="300"
         />
         <Button fx:id="btnLogin"
                 text="Entrar"
                 maxWidth="250"
                 onAction="#onLogin"
+                styleClass="btnLogin"
+
+        />
+
+        <Button fx:id="btnCadastro"
+                text="Cadastrar"
+                maxWidth="250"
+                styleClass="btnCadastro"
+                onAction="#cadastrar"
+
+        />
+
+        <Button fx:id="btnReset"
+                text="Esqueci Minha Senha"
+                maxWidth="250"
+                styleClass="btnReset"
+                onAction="#resetSenha"
 
         />
 

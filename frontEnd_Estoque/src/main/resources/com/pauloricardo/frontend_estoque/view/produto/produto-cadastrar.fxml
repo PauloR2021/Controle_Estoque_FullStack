@@ -6,11 +6,58 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.pauloricardo.frontend_estoque.Controller.Produto.CadastarController"
-            prefHeight="400.0" prefWidth="600.0">
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.pauloricardo.frontend_estoque.Controller.Produto.CadastrarController"
+      prefHeight="600.0" prefWidth="1200.0"
+      spacing="15"
+      stylesheets="/com/pauloricardo/frontend_estoque/styles/produto-cadastrar.css"
+      alignment="TOP_CENTER">
 
-    <Label text="Deu Certo"></Label>
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
 
-</AnchorPane>
+    <Label text="Cadastro de Produtos"
+           style="-fx-font-size: 18; -fx-font-weight: bold;" />
+
+
+    <Separator prefWidth="200" />
+
+
+    <GridPane hgap="10" vgap="10" alignment="CENTER">
+        <Label text="Nome do Produto:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+        <TextField fx:id="textNome"
+                   promptText="Nome do Produto"
+                   GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+        <Label text="Código de Barras:"  GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextField fx:id="textCodigo"
+                   promptText="Código de Barras do Produto"
+                   GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+        <Label text="Quantidade no Estoque: " GridPane.columnIndex="0" GridPane.rowIndex="2" />
+        <TextField fx:id="textQuantidade"
+                   promptText="Quantidade no Estoque"
+                   GridPane.columnIndex="1" GridPane.rowIndex="2"  />
+
+        <Label text="Estoque Minimo:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="txtMinimo"
+                   promptText="Estoque Minimo"
+                   GridPane.columnIndex="1" GridPane.rowIndex="3"
+        />
+
+        <Label text="Preço do Produto:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <TextField fx:id="txtPreco"
+                   promptText="Preço do Produto"
+                   GridPane.columnIndex="1" GridPane.rowIndex="4" />
+    </GridPane>
+
+    <!-- BOTÃO CADASTRAR CENTRALIZADO -->
+    <Separator prefWidth="200" />
+    <HBox alignment="CENTER" prefWidth="600">
+        <Button fx:id="btnCadastrar" text="Cadastrar" onAction="#cadastrar" styleClass="btnCadastro"/>
+    </HBox>
+
+</VBox>

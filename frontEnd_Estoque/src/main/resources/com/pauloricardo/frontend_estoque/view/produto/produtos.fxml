@@ -6,18 +6,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.geometry.Insets?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.pauloricardo.frontend_estoque.Controller.Produto.ProdutoController"
-            prefHeight="400.0" prefWidth="600.0">
+            stylesheets="/com/pauloricardo/frontend_estoque/styles/produto.css"
+            prefHeight="600.0" prefWidth="1200.0">
 
     <!-- Menu FiXO -->
     <top>
-        <Button fx:id="btnCadastrar" text="Cadastrar" />
-        <Button fx:id="btnListar" text="Listar"/>
-        <Button fx:id="btnEditar" text="Editar"/>
-        <Button fx:id="btnExcluir" text="Excluir"/>
+        <HBox spacing="40" alignment="CENTER" >
+            <padding>
+                <Insets top="20" right="0" bottom="20" left="0"/>
+            </padding>
+            <Button fx:id="btnCadastrar" text="Cadastrar" onAction="#abriCadastro" />
+            <Button fx:id="btnListar" text="Listar" onAction="#abriLista"/>
+            <Button fx:id="btnLogout" text="Logout" onAction="#logout" alignment="TOP_RIGHT"/>
+        </HBox>
     </top>
+
+
 
     <!-- CONTEÚDO QUE MUDA -->
     <center>

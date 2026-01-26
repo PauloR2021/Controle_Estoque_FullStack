@@ -9,46 +9,67 @@
 <?import javafx.geometry.Insets?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.pauloricardo.frontend_estoque.Controller.Produto.CriarUsuario"
+      fx:controller="com.pauloricardo.frontend_estoque.Controller.CriarUsuario"
       prefHeight="600.0" prefWidth="1200.0"
       spacing="15"
-      alignment="TOP_CENTER">
+      alignment="TOP_CENTER"
+      stylesheets="/com/pauloricardo/frontend_estoque/styles/cadastro-usuario.css">
 
     <padding>
         <Insets top="20" right="20" bottom="20" left="20"/>
     </padding>
 
-    <Label text="Criar Usuário"/>
+
+
+    <Label text="Criar Usuário" styleClass="titulo"/>
 
     <Separator prefWidth="200"/>
 
+    <HBox alignment="TOP_RIGHT" prefWidth="600">
+        <Button fx:id="btnLogin" text="Login" styleClass="btnLogin" onAction="#login"/>
+    </HBox>
+
+
     <GridPane hgap="10" vgap="10" alignment="CENTER">
+
         <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
         <TextField fx:id="txtNome"
-                   promptText="Nome do Usuário"
+                   promptText="Digite o Nome do Usuário"
                    GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-        <Label text="Nome de Usuário:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label text="Username:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
         <TextField fx:id="txtUsuario"
-                   promptText="Nome do Usuário"
+                   promptText="Digite o Username"
                    GridPane.columnIndex="1" GridPane.rowIndex="1"/>
 
-        <Label text="Senha:" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Password:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
         <PasswordField fx:id="txtSenha"
-                        promptText="Digite sua Senah"
+                        promptText="Digite seu Password"
                         prefWidth="250"
-                        GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <TextField fx:id="textFieldSenha"
+                   promptText="Digite seu Password"
+                   visible="false"
+                   managed="false"
+                   prefWidth="250"
+                   GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Button fx:id="btnMostrarSenha" text="👁" styleClass="btnMostarSenha"
+                GridPane.columnIndex="2" GridPane.rowIndex="2"
+                onAction="#mostrarSenha"/>
 
         <Label text="Email do Usuário:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
         <TextField fx:id="txtEmail"
                    promptText="Digite seu Email"
-                   GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                   GridPane.columnIndex="1" GridPane.rowIndex="3"/>
     </GridPane>
 
     <!-- BOTÃO CADASTRAR CENTRALIZADO -->
     <Separator prefWidth="200" />
     <HBox alignment="CENTER" prefWidth="600">
-        <Button fx:id="btnCriar" text="Cadastrar" styleClass="btnCriar"/>
+        <Button fx:id="btnCriar" text="Cadastrar" styleClass="btnCriar" onAction="#cadastrar"/>
     </HBox>
 
 </VBox>
