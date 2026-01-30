@@ -1,6 +1,7 @@
 package com.pauloricardo.frontend_estoque.Controller;
 
 import com.pauloricardo.frontend_estoque.Session.Session;
+import com.pauloricardo.frontend_estoque.Util.AlertUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -85,7 +86,7 @@ public class MenuPrincipalController {
             stage.centerOnScreen();
             stage.show();
         }catch (Exception e){
-            System.out.println("Erro: "+ e.getMessage());
+            AlertUtil.erro("Erro: "+ e.getMessage());
             e.printStackTrace();
         }
     }

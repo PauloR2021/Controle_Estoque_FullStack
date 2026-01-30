@@ -2,6 +2,7 @@ package com.pauloricardo.frontend_estoque.Controller.Produto;
 
 import com.pauloricardo.frontend_estoque.DTO.Produto.ProdutoResponseDTO;
 import com.pauloricardo.frontend_estoque.Session.Session;
+import com.pauloricardo.frontend_estoque.Util.AlertUtil;
 import javafx.fxml.FXML;
 
 import javafx.scene.control.Alert;
@@ -56,7 +57,7 @@ public class EditarProduto {
 
             //Verificaindo os Campos
             if(txtNome.getText().isBlank() || txtCodigo.getText().isBlank()){
-                mostrarAlerta("Erro","Nome e Código de Barras são Obrigatórias");
+                AlertUtil.erro("Nome e Código de Barras são Obrigatórias");
                 return;
             }
 
@@ -94,41 +95,27 @@ public class EditarProduto {
             HttpResponse<String> response =
                     client.send(request, HttpResponse.BodyHandlers.ofString());
 
-
-            //Retornos da API
-            switch (response.statusCode()) {
-                case 200:
-                    mostrarAlerta("Atualizado","Produto Atualizado com Sucesso !!");
-                    fecharJanela();
-                    break;
-
-                case 201:
-                    mostrarAlerta("Atualizado", "Produto Atualizado com Sucesso !!");
-                    fecharJanela();
-                    break;
-                case 400 :
-                    mostrarAlerta("Erro", "Dados inválidos");
-                    break;
-                case 401:
-                    mostrarAlerta("Erro", "Sessão expirada. Faça login novamente.");
-                    Session.clear();
-                    break;
-
-                case 403:
-                    mostrarAlerta("Erro", "Você não tem permissão para essa ação");
-                    break;
-                case 409:
-                    mostrarAlerta("Erro de Validação","");
-                    break;
-
-
-                default:
-                    mostrarAlerta("Erro", "Erro inesperado (" + response.statusCode() + ")");
-                    break;
+            if (response.statusCode() == 200){
+                AlertUtil.aviso("Produto Atualizado com Sucesso !!");
+            } else if (response.statusCode() == 201) {
+                AlertUtil.aviso("Produto Atualizado com Sucesso !!");
+                fecharJanela();
+            } else if (response.statusCode() == 400) {
+                AlertUtil.erro("Dados Inválidos");
+            } else if (response.statusCode() == 401) {
+                AlertUtil.erro("Sessão expirada. Faça Login Novamente");
+                Session.clear();
+            } else if (response.statusCode() == 403) {
+                AlertUtil.erro("Você não tem Permissão para essa Ação");
+            } else if (response.statusCode() == 409) {
+                AlertUtil.erro("Erro de Validação");
+            }else{
+                AlertUtil.erro( "Erro inesperado (" + response.statusCode() + ")");
             }
 
+
         } catch (Exception e) {
-            mostrarAlerta("Erro","Falha ao Cadastrar produto: "+e.getMessage());
+            AlertUtil.erro("Falha ao Cadastrar produto: "+e.getMessage());
         }
 
     }
@@ -144,13 +131,6 @@ public class EditarProduto {
         stage.close();
     }
 
-    private void mostrarAlerta(String titulo, String mensagem){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
-    }
 
 
 }

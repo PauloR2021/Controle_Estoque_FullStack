@@ -1,5 +1,6 @@
 package com.pauloricardo.frontend_estoque.Controller;
 
+import com.pauloricardo.frontend_estoque.Util.AlertUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -26,11 +27,10 @@ public class ValidandoEmailResetSenha {
     private void telaResetSenha(){
 
         try{
-
             //Validando dados
 
             if(txtEmail.getText().isBlank()){
-                mostrarAlerta("Erro","Preencha o Campo de Email");
+                AlertUtil.erro("Preencha o Campo de Email");
                 return;
             }
 
@@ -50,27 +50,22 @@ public class ValidandoEmailResetSenha {
                     client.send(request,HttpResponse.BodyHandlers.ofString());
 
             if(response.statusCode() == 200){
-                mostrarAlerta("Código", "Código Enviado com Sucesso para Validação!");
+                AlertUtil.sucesso( "Código Enviado com Sucesso para Validação!");
                 txtEmail.clear();
                 abrirResetSenha("/com/pauloricardo/frontend_estoque/view/reset-senha.fxml");
             } else if (response.statusCode() == 400) {
-                mostrarAlerta("Erro","Não Foi Possível enviar Código de Validação");
+                AlertUtil.erro("Não Foi Possível enviar Código de Validação");
             } else if (response.statusCode() == 500) {
-                mostrarAlerta("Erro","Sem Retorno do Servidor como o APP");
+                AlertUtil.erro("Sem Retorno do Servidor como o APP");
             }else{
-                mostrarAlerta("Erro","Erro no Cadastro");
+                AlertUtil.erro("Erro no Cadastro");
                 System.out.println(response.statusCode());
             }
-
         } catch (Exception e) {
-            mostrarAlerta("Erro",e.getMessage());
+            AlertUtil.erro("Erro"+e.getMessage());
             throw new RuntimeException(e);
         }
-
-
-
     }
-
     private void abrirResetSenha(String caminho) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(caminho));
         Parent root = loader.load();
@@ -84,13 +79,4 @@ public class ValidandoEmailResetSenha {
         stage.show();
     }
 
-
-    //Metodo para Mostar Mensagens do Retorno da API
-    private void mostrarAlerta(String titulo, String mensagem){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
-    }
 }

@@ -1,6 +1,7 @@
 package com.pauloricardo.frontend_estoque.Controller;
 
 import com.pauloricardo.frontend_estoque.Session.Session;
+import com.pauloricardo.frontend_estoque.Util.AlertUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -38,6 +39,7 @@ public class ValidandoCodigo {
             stage.setResizable(true);
             stage.show();
         } catch (Exception e) {
+            AlertUtil.erro("Erro: "+e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -50,7 +52,7 @@ public class ValidandoCodigo {
             //Verificando os Campos
 
             if(txtEmail.getText().isBlank() || txtCodigo.getText().isBlank() ){
-                mostrarAlerta("Erro","Preencha o Email e o Código para Válidar");
+                AlertUtil.aviso("Preencha o Email e o Código para Válidar");
                 return;
             }
 
@@ -80,21 +82,22 @@ public class ValidandoCodigo {
             //Retornos da API  Validando os o Cadastros e Erros
 
             if(response.statusCode() == 200){
-                mostrarAlerta("Usuário Válidado", "Usuário Validado com Sucesso!");
+                AlertUtil.sucesso("Usuário Validado com Sucesso!");
                 limparCampos();
                 abrirLogin("/com/pauloricardo/frontend_estoque/view/login.fxml");
             } else if (response.statusCode() == 400) {
-                mostrarAlerta("Erro","Usuário não Validado");
+                AlertUtil.erro("Usuário não Validado");
             } else if (response.statusCode() == 500) {
-                mostrarAlerta("Erro","Sem Retorno do Servidor como o APP");
+                AlertUtil.erro("Sem Retorno do Servidor como o APP");
             }else{
-                mostrarAlerta("Erro","Erro no Cadastro");
+                AlertUtil.erro("Erro no Cadastro");
                 System.out.println(response.statusCode());
             }
 
 
 
         } catch (Exception e) {
+            AlertUtil.erro("Error: "+e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -102,15 +105,6 @@ public class ValidandoCodigo {
     private void limparCampos() {
         txtCodigo.clear();
         txtEmail.clear();
-    }
-
-    //Metodo para Mostar Mensagens do Retorno da API
-    private void mostrarAlerta(String titulo, String mensagem){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
     }
 
     private void abrirLogin(String caminho) throws IOException {

@@ -1,6 +1,7 @@
 package com.pauloricardo.frontend_estoque.Controller;
 
 import com.pauloricardo.frontend_estoque.Service.AutenticacaoService;
+import com.pauloricardo.frontend_estoque.Util.AlertUtil;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -30,18 +31,18 @@ public class LoginController {
         String password = txtPassword.getText();
 
         if(username.isBlank() || password.isBlank()){
-            alert("Erro","Preencha todos os Campos");
+            AlertUtil.erro("Preencha todos os Campos");
             return;
         }
 
         boolean sucesso = autenticacaoService.login(username,password);
 
         if(sucesso) {
-            alert("Sucesso", "Login realizado com Sucesso !");
+            AlertUtil.sucesso( "Login realizado com Sucesso !");
 
            menuPrincipal("/com/pauloricardo/frontend_estoque/view/menu_principal.fxml");
         }else {
-            alert("Erro","Usuário ou Senha Inválidos");
+            AlertUtil.erro("Usuário ou Senha Inválidos");
         }
     }
 
@@ -60,11 +61,12 @@ public class LoginController {
             stage.show();
 
         }catch (Exception e){
-            alert("Erro",e.getMessage());
+            AlertUtil.erro("Erro: "+e.getMessage());
         }
 
 
     }
+
 
     @FXML
     private void resetSenha(){
@@ -81,18 +83,9 @@ public class LoginController {
             stage.show();
 
         }catch (Exception e){
-            alert("Erro",e.getMessage());
+            AlertUtil.erro("Erro: "+ e.getMessage());
         }
 
-    }
-
-    //Função para Mensagens de Alertas
-    private void alert(String titulo, String msg) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-        alert.showAndWait(); //.Bloqueia até clicar em OK
     }
 
     //Função para Chamar o Menu Principal do APP

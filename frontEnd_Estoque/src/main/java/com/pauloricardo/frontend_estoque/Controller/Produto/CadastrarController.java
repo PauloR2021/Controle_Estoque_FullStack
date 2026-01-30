@@ -1,6 +1,7 @@
 package com.pauloricardo.frontend_estoque.Controller.Produto;
 
 import com.pauloricardo.frontend_estoque.Session.Session;
+import com.pauloricardo.frontend_estoque.Util.AlertUtil;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -27,7 +28,7 @@ public class CadastrarController {
         try{
             //Verificando os Campos
             if(textNome.getText().isBlank() || textCodigo.getText().isBlank()){
-                mostrarAlerta("Erro","Nome e Código de Barras são Obrigatórias");
+                AlertUtil.erro("Nome e Código de Barras são Obrigatórias");
                 return;
             }
 
@@ -61,37 +62,34 @@ public class CadastrarController {
             HttpClient client = HttpClient.newHttpClient();
             HttpResponse<String> response =
                     client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            //Retornos da API  Validando os o Cadastros e Erros
-            switch (response.statusCode()) {
-                case 200 -> mostrarAlerta("Cadastrado","Produto Cadastrado com Sucesso !!");
-                case 201 -> mostrarAlerta("Cadastrado", "Produto Cadastrado com Sucesso !!");
-                case 400 -> mostrarAlerta("Erro", "Dados inválidos");
-                case 401 -> {
-                    mostrarAlerta("Erro", "Sessão expirada. Faça login novamente.");
-                    Session.clear();
-                }
-                case 403 -> mostrarAlerta("Erro", "Você não tem permissão para essa ação");
-                case 409 -> mostrarAlerta("Erro", "Produto já cadastrado");
-                default -> mostrarAlerta("Erro", "Erro inesperado (" + response.statusCode() + ")");
+            
+            
+            if(response.statusCode() == 200){
+                AlertUtil.sucesso("Produto Cadastrado com Sucesso !!");
+                limparCampos();
+            } else if (response.statusCode() == 2001) {
+                AlertUtil.sucesso("Produto Cadastrado com Sucesso !!");
+                limparCampos();
+            } else if (response.statusCode() == 400) {
+                AlertUtil.aviso( "Dados inválidos");
+            } else if (response.statusCode()== 401) {
+                AlertUtil.aviso("Dados inválidos");
+                Session.clear();
+            } else if (response.statusCode() == 403) {
+                AlertUtil.erro("Você não tem permissão para essa ação");
+            } else if (response.statusCode() == 409) {
+                AlertUtil.erro("Produto já cadastrado");
+            }else{
+                AlertUtil.erro( "Erro inesperado (" + response.statusCode() + ")");
             }
 
-
         }catch (Exception e){
-            mostrarAlerta("Erro","Falha ao Cadastrar produto: "+e.getMessage());
+            AlertUtil.erro("Falha ao Cadastrar produto: "+e.getMessage());
         }
 
     }
 
-    //Metodo para Mostar Mensagens do Retorno da API
-    private void mostrarAlerta(String titulo, String mensagem){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
-    }
-
+   
     //Limpar Campos
     private void limparCampos() {
         textNome.clear();

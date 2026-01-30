@@ -1,5 +1,6 @@
 package com.pauloricardo.frontend_estoque.Controller;
 
+import com.pauloricardo.frontend_estoque.Util.AlertUtil;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,20 +37,19 @@ public class ResetSenha {
         try{
 
             if (txtEmail.getText().isBlank() || txtCode.getText().isBlank()){
-                mensagem("Erro nos Dados", "Email e Email não podem ser Vazios!");
+                AlertUtil.aviso( "Email e Email não podem ser Vazios!");
                 return;
             }
 
             String senha = getSenhaDigitada();
 
             if (senha == null || senha.isBlank() || senha.length() < 8) {
-                mensagem("Erro na Senha", "A senha deve ter no mínimo 8 caracteres");
+                AlertUtil.aviso( "A senha deve ter no mínimo 8 caracteres");
                 return;
             }
 
             if (!senha.matches("^(?=.*[A-Za-z])(?=.*\\d).{8,}$")) {
-                mensagem("Erro na Senha",
-                        "A senha deve conter letras e números");
+                AlertUtil.aviso("A senha deve conter letras e números");
                 return;
             }
 
@@ -84,16 +84,16 @@ public class ResetSenha {
             //Retornos da API  Validando os o Cadastros e Erros
 
             if(response.statusCode() == 200){
-                mensagem("Senha Alterada", "Senha Alterada com Sucesso!");
+                AlertUtil.sucesso("Senha Alterada com Sucesso!");
                 txtCode.clear();
                 txtEmail.clear();
                 abrirLogin("/com/pauloricardo/frontend_estoque/view/login.fxml");
             } else if (response.statusCode() == 400) {
-                mensagem("Erro","Não Possível Alterar a Senha ");
+                AlertUtil.erro("Não Possível Alterar a Senha ");
             } else if (response.statusCode() == 500) {
-                mensagem("Erro","Sem Retorno do Servidor como o APP");
+                AlertUtil.erro("Sem Retorno do Servidor como o APP");
             }else{
-                mensagem("Erro","Erro no Cadastro");
+                AlertUtil.erro("Erro no Cadastro");
                 System.out.println(response.statusCode());
             }
 
@@ -142,7 +142,7 @@ public class ResetSenha {
             stage.setResizable(false);
             stage.show();
         }catch (Exception e){
-            mensagem("Error",e.getMessage());
+            AlertUtil.aviso("Error"+e.getMessage());
             throw new RuntimeException(e);
 
         }
@@ -175,7 +175,7 @@ public class ResetSenha {
             stage.show();
 
         } catch (Exception e) {
-            mensagem("Error",e.getMessage());
+            AlertUtil.erro("Error"+e.getMessage());
             throw new RuntimeException(e);
         }
 
@@ -187,12 +187,4 @@ public class ResetSenha {
                 : textFieldSenha.getText();
     }
 
-    private void mensagem(String titulo, String msg){
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-        alert.showAndWait();
-    }
 }

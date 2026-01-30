@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.pauloricardo.frontend_estoque.DTO.Produto.ProdutoResponseDTO;
 import com.pauloricardo.frontend_estoque.Session.Session;
+import com.pauloricardo.frontend_estoque.Util.AlertUtil;
 import javafx.collections.FXCollections;
 
 import javafx.collections.ObservableList;
@@ -194,6 +195,7 @@ public class ListarProduto {
             carregarProdutos();
 
         }catch (Exception e){
+            AlertUtil.erro("Erro: "+e.getMessage());
             e.printStackTrace();
         }
     }
@@ -212,7 +214,7 @@ public class ListarProduto {
             if(resultado.isPresent() && resultado.get() == ButtonType.OK){
                 excluirProdutoAPI(produto.getId()); //Função da API para Excluir o Produto
             }else {
-                mostrarAlerta("Cancelamento","Cliente Cancelou a Exclusão do Produto");
+                AlertUtil.aviso("Cliente Cancelou a Exclusão do Produto");
             }
 
         } catch (Exception e) {
@@ -240,26 +242,21 @@ public class ListarProduto {
             System.out.println(response);
 
             if(response.statusCode() == 200){
-                mostrarAlerta("Sucesso","Produto Excluido com Sucesso");
+                AlertUtil.sucesso("Produto Excluido com Sucesso");
                 carregarProdutos(); //Lista todos os Produtos Novamente
 
             }else {
 
-                mostrarAlerta("Erro","Erro ao Exlcuir o Produto + ");
+                AlertUtil.erro("Erro ao Excluir o Produto ");
 
             }
 
         } catch (Exception e) {
+            AlertUtil.erro("Erro: "+e.getMessage());
             throw new RuntimeException(e);
         }
     }
 
-    private void mostrarAlerta(String titulo, String mensagem){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle(titulo);
-        alert.setHeaderText(null);
-        alert.setContentText(mensagem);
-        alert.showAndWait();
-    }
+
 
 }
